@@ -2,6 +2,8 @@ const test = require('brittle')
 const user32 = require('.')
 
 const {
+  GA_PARENT,
+  GA_ROOT,
   SM_CXSCREEN,
   SM_CYSCREEN,
   INPUT_MOUSE,
@@ -24,6 +26,35 @@ test('maps points through the desktop window', (t) => {
   t.is(typeof desktop, 'bigint')
   t.alike(user32.clientToScreen(desktop, 12, 34), { x: 12, y: 34 }, 'to the screen')
   t.alike(user32.screenToClient(desktop, 12, 34), { x: 12, y: 34 }, 'to the client area')
+})
+
+test('finds the window at a point', (t) => {
+  const window = user32.windowFromPoint(0, 0)
+
+  // A session without a desktop, such as one over SSH, has no window anywhere.
+  if (window === null) {
+    t.comment('no window to find')
+  } else {
+    t.is(typeof window, 'bigint', 'a window')
+    t.is(typeof user32.getAncestor(window, GA_ROOT), 'bigint', 'with a root')
+  }
+
+  t.is(user32.getAncestor(user32.getDesktopWindow(), GA_PARENT), null, 'the desktop has no parent')
+})
+
+test('reads the foreground window', (t) => {
+  const window = user32.getForegroundWindow()
+
+  t.ok(window === null || typeof window === 'bigint')
+})
+
+test('cannot bring a window that does not exist to the foreground', (t) => {
+  t.is(user32.setForegroundWindow(0n), false)
+})
+
+test('has nothing captured', (t) => {
+  t.is(user32.getCapture(), null, 'no capture')
+  t.is(user32.releaseCapture(), true, 'releases nothing')
 })
 
 test('cannot map points through a window that does not exist', (t) => {

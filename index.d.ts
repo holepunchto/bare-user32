@@ -47,6 +47,24 @@ export function getCursorPos(): Point | null
 /** `GetDesktopWindow()`. */
 export function getDesktopWindow(): Window
 
+/** `WindowFromPoint()`: the window at the screen point `x`, `y`, or `null` if there is none. */
+export function windowFromPoint(x: number, y: number): Window | null
+
+/** `GetAncestor()`, given a `GA_*` constant, or `null` if `window` has no such ancestor. */
+export function getAncestor(window: Window, flags: number): Window | null
+
+/** `GetForegroundWindow()`, or `null` while the foreground is changing. */
+export function getForegroundWindow(): Window | null
+
+/** `SetForegroundWindow()`: whether `window` was brought to the foreground. */
+export function setForegroundWindow(window: Window): boolean
+
+/** `GetCapture()`: the window of the calling thread that has captured the mouse, or `null`. */
+export function getCapture(): Window | null
+
+/** `ReleaseCapture()`: whether the capture of the calling thread was released. */
+export function releaseCapture(): boolean
+
 /** `GetSystemMetrics()`, given an `SM_*` constant. */
 export function getSystemMetrics(index: number): number
 

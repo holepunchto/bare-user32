@@ -5,6 +5,9 @@ declare const constants: {
   SM_YVIRTUALSCREEN: number
   SM_CXVIRTUALSCREEN: number
   SM_CYVIRTUALSCREEN: number
+  GA_PARENT: number
+  GA_ROOT: number
+  GA_ROOTOWNER: number
   INPUT_MOUSE: number
   INPUT_KEYBOARD: number
   MOUSEEVENTF_MOVE: number
