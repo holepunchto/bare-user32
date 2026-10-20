@@ -23,6 +23,30 @@ exports.getDesktopWindow = function getDesktopWindow() {
   return binding.getDesktopWindow()
 }
 
+exports.windowFromPoint = function windowFromPoint(x, y) {
+  return binding.windowFromPoint(x, y)
+}
+
+exports.getAncestor = function getAncestor(window, flags) {
+  return binding.getAncestor(window, flags)
+}
+
+exports.getForegroundWindow = function getForegroundWindow() {
+  return binding.getForegroundWindow()
+}
+
+exports.setForegroundWindow = function setForegroundWindow(window) {
+  return binding.setForegroundWindow(window)
+}
+
+exports.getCapture = function getCapture() {
+  return binding.getCapture()
+}
+
+exports.releaseCapture = function releaseCapture() {
+  return binding.releaseCapture()
+}
+
 exports.getSystemMetrics = function getSystemMetrics(index) {
   return binding.getSystemMetrics(index)
 }
